@@ -1,4 +1,6 @@
 import Image from "next/image";
+import SideBar from "@/app/sidebar-navbar"
+import Sidebar from "@/app/sidebar-navbar";
 
 export default function Home() {
   return (
