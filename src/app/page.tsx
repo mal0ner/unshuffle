@@ -1,11 +1,6 @@
 'use client';
 
-import Clubs from '@/components/icons/Clubs';
-import Diamonds from '@/components/icons/Diamonds';
-import Hearts from '@/components/icons/Hearts';
-import Spades from '@/components/icons/Spades';
-import SearchBar from '@/components/SearchBar';
-import Link from 'next/link';
+import Suit from '@/components/icons/Suit';
 
 export default function Home() {
   return (
@@ -13,10 +8,10 @@ export default function Home() {
       <nav className="flex flex-col gap-2">
         <h1 className="text-5xl font-header font-bold text-white">unshuffle</h1>
         <div className="flex gap-1 items-center justify-center">
-          <Clubs size={50} />
-          <Spades size={50} />
-          <Hearts size={50} />
-          <Diamonds size={50} />
+          <Suit suit="club" size={50} />
+          <Suit suit="spade" size={50} />
+          <Suit suit="heart" size={50} className="fill-accent-red" />
+          <Suit suit="diamond" size={50} />
         </div>
       </nav>
       <main className="flex flex-col gap-20 items-center justify-center w-full max-w-prose"></main>
