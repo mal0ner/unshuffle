@@ -3,6 +3,9 @@
 :root {
   --background: #121212;
   --foreground: #ffffff;
+  --foreground-rgb: 255 255 255;
+  --card: rgb(var(--foreground-rgb) / 0.1);
+  --card-shadow: rgb(var(--foreground-rgb) / 0.2);
   --accent-red: #aa0000;
 }
 
@@ -10,8 +13,13 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent-red: var(--accent-red);
+  --color-card: var(--card);
+  --color-card-shadow: var(--card-shadow);
   --font-header: var(--font-press-start);
   --font-body: var(--font-space-mono);
+
+  --shadow-card: 6px 6px 0 var(--card-shadow);
+  --shadow-card-hover: 6px 6px 0 var(--card);
 }
 
 body {
