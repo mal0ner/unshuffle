@@ -1,6 +1,16 @@
 'use client';
 
 import Suit from '@/components/icons/Suit';
+import SearchBar from '@/components/SearchBar';
+import TopGames from '@/components/TopGames';
+
+const topGames = [
+  { name: 'Poker', likes: 239 },
+  { name: 'Superbad', likes: 192 },
+  { name: 'Atom Break', likes: 69 },
+  { name: 'Card Fury', likes: 45 },
+  { name: 'Dairy Farmer', likes: 19 },
+];
 
 export default function Home() {
   return (
@@ -14,7 +24,19 @@ export default function Home() {
           <Suit suit="diamond" size={50} />
         </div>
       </nav>
-      <main className="flex flex-col gap-20 items-center justify-center w-full max-w-prose"></main>
+      <main className="flex flex-col gap-20 items-center justify-center w-full max-w-prose">
+        <SearchBar />
+        <section className="flex flex-col gap-4 justify-center items-center max-w-prose">
+          <h2 className="text-3xl font-header font-bold text-white">
+            Rules and Scores
+          </h2>
+          <p className="font-body">
+            Unshuffle has rulesets and score cards for all your favourite card
+            games!
+          </p>
+        </section>
+        <TopGames games={topGames} />
+      </main>
     </div>
   );
 }
