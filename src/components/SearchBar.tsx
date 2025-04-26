@@ -87,45 +87,43 @@ export default function SearchBar() {
   const [isFocus, setIsFocus] = React.useState<boolean>(false);
 
   return (
-    <div className="relative flex w-full gap-4 font-body h-[100px] z-50">
-      <div className="absolute top-0 left-0 w-full z-50">
-        <div className="flex text-foreground flex-col w-full gap-2 items-center justify-center shadow-card overflow-hidden bg-card">
-          <input
-            id="search"
-            placeholder="What do you want to play? _"
-            value={inpVal}
-            onFocus={() => setIsFocus(true)}
-            onBlur={() => setIsFocus(false)}
-            onInput={(e) => {
-              setInpVal(e.currentTarget.value);
-            }}
-            className="p-4 w-full outline-none"
-          />
-          <div className="w-full top-full left-0">
-            {inpVal &&
-              isFocus &&
-              items
-                .filter((i) =>
-                  i
-                    .toLowerCase()
-                    .trim()
-                    .startsWith(inpVal.toLowerCase().trim()),
-                )
-                .map((i, idx) => (
-                  <p
-                    key={idx}
-                    onMouseDown={() => {
-                      setInpVal(i);
-                      setIsFocus(false);
-                    }}
-                    className="px-4 py-2 cursor-pointer"
-                  >
-                    {i}
-                  </p>
-                ))}
-          </div>
+    <div className="flex w-full gap-2">
+      <div className="flex flex-col w-full gap-2 items-center justify-center">
+        <input
+          id="search"
+          placeholder="What do you want to play? _"
+          value={inpVal}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+          onInput={(e) => {
+            setInpVal(e.currentTarget.value);
+          }}
+          className="bg-[#e7cfb1] rounded-sm text-black p-4 font-mono w-full"
+        />
+        <div className="w-full">
+          {inpVal &&
+            isFocus &&
+            items
+              .filter((i) =>
+                i.toLowerCase().trim().startsWith(inpVal.toLowerCase().trim()),
+              )
+              .map((i) => (
+                <p
+                  key={i}
+                  onMouseDown={() => {
+                    setInpVal(i);
+                    setIsFocus(false);
+                  }}
+                  className="bg-[#e7cfb1] text-black px-4 py-2 cursor-pointer hover:bg-slate-200"
+                >
+                  {i}
+                </p>
+              ))}
         </div>
       </div>
+      <button className="h-full font-bold hover:bg-rose-700 cursor-pointer rounded-sm bg-rose-800 p-4 text-white font-mono">
+        Go
+      </button>
     </div>
   );
 }
