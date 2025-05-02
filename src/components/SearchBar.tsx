@@ -125,7 +125,7 @@ export default function SearchBar() {
                   setInpVal(item);
                   setIsFocus(false);
                 }}
-                className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                className="px-4 py-2 cursor-pointer hover:bg-card-shadow"
               >
                 {item}
               </p>
