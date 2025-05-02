@@ -4,8 +4,10 @@
   --background: #121212;
   --foreground: #ffffff;
   --foreground-rgb: 255 255 255;
-  --card: rgb(var(--foreground-rgb) / 0.1);
-  --card-shadow: rgb(var(--foreground-rgb) / 0.2);
+  /* --card: rgb(var(--foreground-rgb) / 0.1); */
+  --card: #313131;
+  /* --card-shadow: rgb(var(--foreground-rgb) / 0.2); */
+  --card-shadow: #4b4b4b;
   --accent-red: #aa0000;
 }
 
