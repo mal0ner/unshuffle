@@ -83,48 +83,55 @@ export default function SearchBar() {
     'Kings in the Corner',
   ];
 
+  const inputRef = React.useRef<HTMLInputElement>(null);
   const [inpVal, setInpVal] = React.useState<string>('');
   const [isFocus, setIsFocus] = React.useState<boolean>(false);
 
+  // Create a filtered list of items
+  const filteredItems = inpVal
+    ? items.filter((item) =>
+        item.toLowerCase().trim().startsWith(inpVal.toLowerCase().trim()),
+      )
+    : [];
+
   return (
-    <div className="relative flex w-full gap-4 font-body h-[100px] z-50">
-      <div className="absolute top-0 left-0 w-full z-50">
-        <div className="flex text-foreground flex-col w-full gap-2 items-center justify-center shadow-card overflow-hidden bg-card">
-          <input
-            id="search"
-            placeholder="What do you want to play? _"
-            value={inpVal}
-            onFocus={() => setIsFocus(true)}
-            onBlur={() => setIsFocus(false)}
-            onInput={(e) => {
-              setInpVal(e.currentTarget.value);
-            }}
-            className="p-4 w-full outline-none"
-          />
-          <div className="w-full top-full left-0">
-            {inpVal &&
-              isFocus &&
-              items
-                .filter((i) =>
-                  i
-                    .toLowerCase()
-                    .trim()
-                    .startsWith(inpVal.toLowerCase().trim()),
-                )
-                .map((i, idx) => (
-                  <p
-                    key={idx}
-                    onMouseDown={() => {
-                      setInpVal(i);
-                      setIsFocus(false);
-                    }}
-                    className="px-4 py-2 cursor-pointer"
-                  >
-                    {i}
-                  </p>
-                ))}
+    <div className="relative w-full font-body">
+      <div className="flex text-foreground flex-col w-full gap-2 items-center justify-center shadow-card overflow-visible bg-card">
+        <input
+          ref={inputRef}
+          id="search"
+          placeholder="What do you want to play? _"
+          value={inpVal}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => {
+            // Small delay to allow click events on dropdown items
+            setTimeout(() => setIsFocus(false), 150);
+          }}
+          onInput={(e) => {
+            setInpVal(e.currentTarget.value);
+          }}
+          className="p-4 w-full outline-none"
+        />
+
+        {inpVal && isFocus && filteredItems.length > 0 && (
+          <div
+            className="absolute left-0 right-0 bg-card max-h-48 overflow-y-auto shadow-card z-50"
+            style={{ top: '100%' }}
+          >
+            {filteredItems.map((item, index) => (
+              <p
+                key={index}
+                onMouseDown={() => {
+                  setInpVal(item);
+                  setIsFocus(false);
+                }}
+                className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+              >
+                {item}
+              </p>
+            ))}
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

@@ -3,6 +3,7 @@
 import Suit from '@/components/icons/Suit';
 import SearchBar from '@/components/SearchBar';
 import TopGames from '@/components/TopGames';
+import React from 'react';
 
 const topGames = [
   { name: 'Poker', likes: 239 },
