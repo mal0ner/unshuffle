@@ -83,47 +83,56 @@ export default function SearchBar() {
     'Kings in the Corner',
   ];
 
+  const inputRef = React.useRef<HTMLInputElement>(null);
   const [inpVal, setInpVal] = React.useState<string>('');
   const [isFocus, setIsFocus] = React.useState<boolean>(false);
 
+  // Create a filtered list of items
+  const filteredItems = inpVal
+    ? items.filter((item) =>
+        item.toLowerCase().trim().startsWith(inpVal.toLowerCase().trim()),
+      )
+    : [];
+
   return (
-    <div className="flex w-full gap-2">
-      <div className="flex flex-col w-full gap-2 items-center justify-center">
+    <div className="relative w-full font-body">
+      <div className="flex text-foreground flex-col w-full gap-2 items-center justify-center shadow-card overflow-visible bg-card">
         <input
+          ref={inputRef}
           id="search"
           placeholder="What do you want to play? _"
           value={inpVal}
           onFocus={() => setIsFocus(true)}
-          onBlur={() => setIsFocus(false)}
+          onBlur={() => {
+            // Small delay to allow click events on dropdown items
+            setTimeout(() => setIsFocus(false), 150);
+          }}
           onInput={(e) => {
             setInpVal(e.currentTarget.value);
           }}
-          className="bg-[#e7cfb1] rounded-sm text-black p-4 font-mono w-full"
+          className="p-4 w-full outline-none"
         />
-        <div className="w-full">
-          {inpVal &&
-            isFocus &&
-            items
-              .filter((i) =>
-                i.toLowerCase().trim().startsWith(inpVal.toLowerCase().trim()),
-              )
-              .map((i) => (
-                <p
-                  key={i}
-                  onMouseDown={() => {
-                    setInpVal(i);
-                    setIsFocus(false);
-                  }}
-                  className="bg-[#e7cfb1] text-black px-4 py-2 cursor-pointer hover:bg-slate-200"
-                >
-                  {i}
-                </p>
-              ))}
-        </div>
+
+        {inpVal && isFocus && filteredItems.length > 0 && (
+          <div
+            className="absolute left-0 right-0 bg-card max-h-48 overflow-y-auto shadow-card z-50"
+            style={{ top: '100%' }}
+          >
+            {filteredItems.map((item, index) => (
+              <p
+                key={index}
+                onMouseDown={() => {
+                  setInpVal(item);
+                  setIsFocus(false);
+                }}
+                className="px-4 py-2 cursor-pointer hover:bg-card-shadow"
+              >
+                {item}
+              </p>
+            ))}
+          </div>
+        )}
       </div>
-      <button className="h-full font-bold hover:bg-rose-700 cursor-pointer rounded-sm bg-rose-800 p-4 text-white font-mono">
-        Go
-      </button>
     </div>
   );
 }
